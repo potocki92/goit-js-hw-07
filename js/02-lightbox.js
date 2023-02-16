@@ -5,7 +5,7 @@ const gallery = document.querySelector(".gallery")
 
 const createItem = (item) => {
   return `
-      <a class="gallery__item" href="${item.original}">
+      <a class="gallery__item" href="${item.original}" data-autoshow="false">
         <img 
           class="gallery__image" 
           src="${item.preview}"
@@ -25,5 +25,9 @@ let lightbox = new SimpleLightbox(`.gallery a`, {
   captionsData: 'alt',
   overlayOpacity: 0.7
 })
-lightbox.open(0)
-lightbox.next()
+
+gallery.addEventListener('click', (event) => {
+  event.preventDefault();
+  lightbox.open()
+  lightbox.loadImage()
+})
